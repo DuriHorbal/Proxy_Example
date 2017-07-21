@@ -3,7 +3,7 @@ package testClasses;
 /**
  * Created by Juraj on 23.2.2016.
  */
-public class Employee implements IEmployee{
+public class Employee implements IEmployee {
 
     private int id;
     private String name;
@@ -15,14 +15,14 @@ public class Employee implements IEmployee{
     }
 
     // This is the constructor of the class Employee
-    public Employee(String name){
+    public Employee(String name) {
         this.name = name;
     }
 
 
     // Assign the age of the Employee  to the variable age.
-    public void empAge(int empAge){
-        age =  empAge;
+    public void empAge(int empAge) {
+        age = empAge;
     }
 
     public IDepartment getDepartment() {
@@ -34,13 +34,13 @@ public class Employee implements IEmployee{
     }
 
     /* Assign the salary to the variable	salary.*/
-    public void empSalary(float empSalary){
+    public void empSalary(float empSalary) {
         salary = empSalary;
     }
 
-    public String toString(){
-        return  "\n****************" +
-                "\n*Name: "+ name +
+    public String toString() {
+        return "\n****************" +
+                "\n*Name: " + name +
                 "\n*Age: " + age +
                 "\n*Salary: " + salary +
                 "\n****************";

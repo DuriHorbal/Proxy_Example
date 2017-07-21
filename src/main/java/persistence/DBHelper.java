@@ -3,7 +3,10 @@ package persistence;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Juraj on 14.3.2016.
@@ -199,7 +202,7 @@ class DBHelper {
                 } else {
                     Object innerObject = f.get(obj);
                     try {
-                        if(innerObject == null){
+                        if (innerObject == null) {
                             values = values + pm.getClassByInterface(f.getType()).getSimpleName() + "_id=null, ";
                         } else if (!innerObject.getClass().getSimpleName().startsWith("$Proxy")) {
 //                            if (innerObject.getClass().isInterface()) {
@@ -253,7 +256,7 @@ class DBHelper {
                     Object innerObject = f.get(obj);
                     if (innerObject != null) {
 //                        if (innerObject.getClass().isInterface()) {
-                            innerObject = pm.getClassByInterface(innerObject.getClass()).cast(innerObject);
+                        innerObject = pm.getClassByInterface(innerObject.getClass()).cast(innerObject);
 //                        }
                         fields = fields + f.getName() + "_id" + ", ";//innerObject.getClass().getSimpleName()
                         if (pm.objectExist(innerObject)) {

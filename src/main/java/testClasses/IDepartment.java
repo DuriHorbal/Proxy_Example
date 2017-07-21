@@ -5,9 +5,14 @@ package testClasses;
  */
 public interface IDepartment {
     IEmployee getBoss();
+
     String getName();
+
     void setName(String name);
+
     String getCode();
+
     void setCode(String code);
+
     void setBoss(Employee boss);
 }

@@ -5,8 +5,11 @@ package testClasses;
  */
 public interface IEmployee {
     IDepartment getDepartment();
+
     void empAge(int empAge);
+
     void setDepartment(Department department);
+
     void empSalary(float empSalary);
 
 }

@@ -1,8 +1,10 @@
 package persistence;
 
 import java.lang.reflect.Field;
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Allows automatize operations with DB (simple ORM)
@@ -23,9 +25,9 @@ public class PersistenceManager {
 
     private void controlClasses(List<Class> clazzes) {
         for (Class clas : clazzes) {
-            try{
+            try {
                 clas.getDeclaredField("id");
-            }catch (Exception e){
+            } catch (Exception e) {
                 throw new RuntimeException("Class " + clas.getName() + " not contains field int id!\n");//+e.toString()
             }
             for (Field field : clas.getDeclaredFields()) {
@@ -33,14 +35,14 @@ public class PersistenceManager {
                         !field.getType().isPrimitive() &&
                         !clazzes.contains(field.getType()) &&
                         !clazzes.contains(getClassByInterface(field.getType()))) {
-                    throw new RuntimeException("Class "+clas.getSimpleName()+" contains unsupported class " + field.getType());
+                    throw new RuntimeException("Class " + clas.getSimpleName() + " contains unsupported class " + field.getType());
                 }
             }
         }
     }
 
     private void setMapOfInterfaces(List<Class> clazzes) {
-        for(Class clas: clazzes){
+        for (Class clas : clazzes) {
             for (Class inter : clas.getInterfaces()) {
                 mapOfInterfaces.put(inter, clas);
             }
@@ -62,16 +64,15 @@ public class PersistenceManager {
     //load all object of type class
     public List getAll(Class type) {
         String query = "SELECT * FROM " + type.getSimpleName();
-        return dbHelper.getResultsList(query,type);
+        return dbHelper.getResultsList(query, type);
     }
 
     //load object of type class by id
     public Object get(Class type, int id) {
         String query = "SELECT * FROM " + type.getSimpleName() +
                 " WHERE id=" + id + " ";
-        return dbHelper.getResultsList(query,type).get(0);
+        return dbHelper.getResultsList(query, type).get(0);
     }
-
 
 
     //load object of type class by field with value
@@ -85,7 +86,7 @@ public class PersistenceManager {
         String query = "SELECT * FROM " + type.getSimpleName() +
                 " WHERE " +
                 field + "=" + val;
-        return dbHelper.getResultsList(query,type);
+        return dbHelper.getResultsList(query, type);
     }
 
     //Save current version of object.
@@ -99,7 +100,7 @@ public class PersistenceManager {
 
     boolean objectExist(Object obj) {
         Object id = getAttrOfObject(obj, "id");
-        if(id == null || ((Integer)id)==0)
+        if (id == null || ((Integer) id) == 0)
             return false;
         return true;
     }
@@ -117,8 +118,8 @@ public class PersistenceManager {
         return null;
     }
 
-    Class getClassByInterface(Class cInterface){
-        if(mapOfInterfaces.containsKey(cInterface))
+    Class getClassByInterface(Class cInterface) {
+        if (mapOfInterfaces.containsKey(cInterface))
             return mapOfInterfaces.get(cInterface);
         else return cInterface;
     }

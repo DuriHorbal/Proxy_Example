@@ -17,10 +17,10 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws URISyntaxException {
-        List<Class> listOfClasses= new ArrayList<Class>();
+        List<Class> listOfClasses = new ArrayList<Class>();
         listOfClasses.add(Department.class);
         listOfClasses.add(Employee.class);
-        Connection c= makeConnection();
+        Connection c = makeConnection();
         PersistenceManager pm = new PersistenceManager(c, listOfClasses);
         pm.initializeDatabase();
 
@@ -63,7 +63,7 @@ public class Main {
         System.out.println();
 
         // check all of employees
-        for(Object o : pm.getAll(Employee.class)){
+        for (Object o : pm.getAll(Employee.class)) {
             System.out.println(o.toString());
         }
         try {

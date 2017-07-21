@@ -1,7 +1,5 @@
 package testClasses;
 
-import java.util.Date;
-
 /**
  * Created by Juraj on 23.2.2016.
  */
@@ -11,7 +9,7 @@ public class Department implements IDepartment {
     private String code;
     private IEmployee boss;
 
-    public Department(){
+    public Department() {
     }
 
     public Department(String name, String code) {
@@ -35,11 +33,11 @@ public class Department implements IDepartment {
         this.code = code;
     }
 
-    public String toString(){
+    public String toString() {
         return "\n****************" +
-                "*Department: "+name +
-                "\n*Code: "+code +
-                "\n*id: "+id +
+                "*Department: " + name +
+                "\n*Code: " + code +
+                "\n*id: " + id +
                 "\n****************";
     }
 
